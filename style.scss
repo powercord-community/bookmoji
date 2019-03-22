@@ -1,0 +1,24 @@
+
+.bookmoji-emoji {
+   margin: 6px;
+   width: 24px;
+   height: 24px;
+}
+
+.bookmoji-emoji-container { 
+   background-color: #23272A;
+   border-radius: 3px;
+   padding: 4px;
+   margin: 6px;
+   z-index: 99;
+   display: inline-block;
+   cursor: pointer;
+   transition: all 0.15s ease;
+   &.bookmoji-emoji-selected {
+      transition: all 0.15s ease;
+      background-color: #43b581 !important;
+      box-shadow: 1px 1px 10px 1px;
+      transform: scale(32px);
+   }
+}
+
