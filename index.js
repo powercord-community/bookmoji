@@ -22,26 +22,19 @@ module.exports = class Bookmoji extends Plugin {
     this.loadCSS(resolve(__dirname, 'style.scss'));
 
     const injection = (props, res) => {
-      console.log(props);
       const emojis = this.settings.get('storedEmojis').filter(a => a.constructor === Object);
       if (emojis.length) {
         const offsetBy = 32;
         let total = 0;
         let index = 0;
-        let offsetTop = offsetBy * 2;
+        let offsetTop = offsetBy * Math.round(emojis.length / 10);
         let row = 0;
         let column = 0;
 
         const finalArray = [];
         let targetArray = [];
         for (const emoji of emojis) {
-          targetArray.push({ emoji,
-            offsetTop,
-            row,
-            column });
-          column++;
-
-          if (index > 9 || total >= emojis.length - 1) {
+          if (index >= 10 || total >= emojis.length - 1) {
             index = 0;
             finalArray.push({ category: 'bookmarked',
               items: targetArray });
@@ -51,6 +44,12 @@ module.exports = class Bookmoji extends Plugin {
             row += 1;
             offsetTop += offsetBy;
           }
+          targetArray.push({ emoji,
+            offsetTop,
+            row,
+            column });
+          column++;
+
 
           index++;
           total++;
@@ -63,8 +62,8 @@ module.exports = class Bookmoji extends Plugin {
         }
 
         for (const category of props.categories) {
-          category.offsetTop += offsetBy;
-          props.categoryOffsets[category.category] += offsetBy;
+          category.offsetTop += offsetBy * Math.round(emojis.length / 10);
+          props.categoryOffsets[category.category] += offsetBy * Math.round(emojis.length / 10);
         }
 
         props.categoryOffsets.bookmarked = 0;
