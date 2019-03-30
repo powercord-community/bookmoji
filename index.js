@@ -74,6 +74,7 @@ module.exports = class Bookmoji extends Plugin {
         props.setState({
           metaData: [ ...finalArray, ...props.state.metaData ]
         });
+
         return res;
       }
     };
@@ -89,7 +90,7 @@ module.exports = class Bookmoji extends Plugin {
     inject('bookmoji-emojiPicker', instancePrototype, 'componentDidMount', function (args, res) {
       return injection(this, res);
     });
-    injection(instancePrototype.componentDidMount());
+    this.instance.componentDidMount();
   }
 
   unload () {
