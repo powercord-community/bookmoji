@@ -34,7 +34,12 @@ module.exports = class Bookmoji extends Plugin {
         const finalArray = [];
         let targetArray = [];
         for (const emoji of emojis) {
-          if (index >= 10 || total >= emojis.length - 1) {
+          targetArray.push({ emoji,
+            offsetTop,
+            row,
+            column });
+
+          if (index >= 10 || total + 1 >= emojis.length) {
             index = 0;
             finalArray.push({ category: 'bookmarked',
               items: targetArray });
@@ -44,13 +49,8 @@ module.exports = class Bookmoji extends Plugin {
             row += 1;
             offsetTop += offsetBy;
           }
-          targetArray.push({ emoji,
-            offsetTop,
-            row,
-            column });
+
           column++;
-
-
           index++;
           total++;
         }
