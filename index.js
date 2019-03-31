@@ -1,4 +1,4 @@
-const Plugin = require('powercord/Plugin');
+const { Plugin } = require('powercord/entities');
 const { inject, uninject } = require('powercord/injector');
 const { waitFor, getOwnerInstance } = require('powercord/util');
 const { React } = require('powercord/webpack');
@@ -6,18 +6,15 @@ const { resolve } = require('path');
 const Settings = require('./Settings');
 
 module.exports = class Bookmoji extends Plugin {
-  async start () {
-    powercord
-      .pluginManager
-      .get('pc-settings')
-      .register(
-        'bookmoji',
-        'Bookmoji',
-        () =>
-          React.createElement(Settings, {
-            settings: this.settings
-          })
-      );
+  async startPlugin () {
+    this.registerSettings(
+      'bookmoji',
+      'Bookmoji',
+      () =>
+        React.createElement(Settings, {
+          settings: this.settings
+        })
+    );
 
     this.loadCSS(resolve(__dirname, 'style.scss'));
 
@@ -93,7 +90,7 @@ module.exports = class Bookmoji extends Plugin {
     this.instance.componentDidMount();
   }
 
-  unload () {
+  pluginWillUnload () {
     uninject('bookmoji-emojiPicker');
   }
 };
