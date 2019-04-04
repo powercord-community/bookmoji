@@ -36,7 +36,11 @@ module.exports = class Bookmoji extends Plugin {
             row,
             column });
 
-          if (index >= 10 || total + 1 >= emojis.length) {
+          column++;
+          index++;
+          total++;
+
+          if (index >= 10 || total >= emojis.length) {
             index = 0;
             finalArray.push({ category: 'bookmarked',
               items: targetArray });
@@ -46,10 +50,6 @@ module.exports = class Bookmoji extends Plugin {
             row += 1;
             offsetTop += offsetBy;
           }
-
-          column++;
-          index++;
-          total++;
         }
 
         for (const cat of props.state.metaData) {
