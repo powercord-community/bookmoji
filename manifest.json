@@ -1,8 +1,8 @@
 {
   "name": "Bookmoji",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Adds a \"Bookmarked\" section to the emoji picker to allow you to pin specific emoji to the top",
-  "author": "Nevulo#0007",
+  "author": "Nevulo#0007, Joakim#9814",
   "license": "MIT",
-  "repo": null
+  "repo": "https://github.com/Nevvulo/bookmoji"
 }
