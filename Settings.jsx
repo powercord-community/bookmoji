@@ -1,8 +1,6 @@
 const { React } = require('powercord/webpack');
 const { getModule } = require('powercord/webpack');
 const { Category } = require('powercord/components/settings');
-const { getSortedGuilds } = getModule([ 'getSortedGuilds' ]);
-const emojiStore = getModule([ 'getGuildEmoji' ]);
 
 module.exports = class Settings extends React.Component {
   constructor (props) {
@@ -15,7 +13,18 @@ module.exports = class Settings extends React.Component {
     };
   }
 
+  async componentDidMount () {
+    this.setState({
+      getSortedGuilds: (await getModule([ 'getSortedGuilds' ])).getSortedGuilds,
+      emojiStore: await getModule([ 'getGuildEmoji' ])
+    });
+  }
+
   render () {
+    if (!this.state.getSortedGuilds) {
+      return null;
+    }
+    const { getSortedGuilds, emojiStore } = this.state;
     return (
       <div>
         <Category
