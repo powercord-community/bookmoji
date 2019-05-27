@@ -35,7 +35,8 @@ module.exports = class Bookmoji extends Plugin {
             emoji,
             offsetTop,
             row,
-            column
+            column,
+            available: true
           });
 
           column++;
