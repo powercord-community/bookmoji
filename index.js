@@ -31,12 +31,12 @@ module.exports = class Bookmoji extends Plugin {
         const finalArray = [];
         let targetArray = [];
         for (const emoji of emojis) {
+          emoji.available = true;
           targetArray.push({
             emoji,
             offsetTop,
             row,
-            column,
-            available: true
+            column
           });
 
           column++;
