@@ -25,6 +25,7 @@ module.exports = class Settings extends React.Component {
       return null;
     }
     const { getSortedGuilds, emojiStore } = this.state;
+
     return (
       <div>
         <Category
@@ -33,7 +34,7 @@ module.exports = class Settings extends React.Component {
           opened={this.state.categoryOpened}
           onChange={() => this.setState({ categoryOpened: !this.state.categoryOpened })}
         >
-          {getSortedGuilds().map(g => g.guild).map(g =>
+          {getSortedGuilds().map(g => g.guilds).flat().map(g =>
             <Category
               name={g.name}
               opened={this.state[`${g.id}-opened`]}
